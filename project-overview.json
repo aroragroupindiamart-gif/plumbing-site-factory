@@ -1,0 +1,283 @@
+{
+  "project": {
+    "name": "Plumbing Directory — Programmatic SEO Multi-Site Generator",
+    "summary": "A system that generates geo-targeted plumbing service pages for every US city × 150 services, deployed as Cloudflare Workers. Built to scale: one template repo powers unlimited independently-branded sites, each with unique AI-generated content, deployed fully automatically via GitHub Actions.",
+    "created_for": "A single operator (aroragroupindiamart-gif on GitHub) running multiple plumbing directory sites under different brand names, all on the Cloudflare free plan.",
+    "first_live_site": {
+      "brand": "Victor Moody Plumbing",
+      "domain": "victormoodyplumbinginc.com",
+      "github_repo": "https://github.com/aroragroupindiamart-gif/plumbing-site-2",
+      "status": "Live and indexed by Google Search Console"
+    }
+  },
+
+  "architecture": {
+    "overview": "A pnpm monorepo with two main parts: (1) a Next.js 15 site template (artifacts/plumbing-directory) that is deployed as a GitHub template repo, and (2) a scripts package (scripts/src/site-factory) containing automation tooling to spin up new sites from that template.",
+    "monorepo_layout": {
+      "artifacts/plumbing-directory": "The Next.js 15 site template — every new site is cloned from this.",
+      "scripts/src/site-factory": "Automation scripts to create repos, wire Cloudflare, and generate unique content per site.",
+      "scripts/src/site-factory/sites-registry.json": "Master registry of every site ever launched — siteId, domain, repo URL, Cloudflare zone ID, content salt."
+    },
+    "deployment_stack": {
+      "framework": "Next.js 15 with App Router",
+      "adapter": "@opennextjs/cloudflare (OpenNext) — wraps Next.js output for Cloudflare Workers runtime",
+      "hosting": "Cloudflare Workers (NOT Cloudflare Pages — each site is a Worker script)",
+      "ci_cd": "GitHub Actions — deploy.yml triggers on every push to main, builds and deploys via wrangler-action",
+      "rendering": "State + city pages: statically generated at build time. Service detail pages: rendered on demand by the Worker, cached at the edge.",
+      "why_not_static_export": "Full static export (~201k HTML files) takes 15-45 minutes to build. Cloudflare Workers + OpenNext lets service pages render on-demand so CI stays fast."
+    }
+  },
+
+  "the_site_template": {
+    "location": "artifacts/plumbing-directory/",
+    "what_it_generates": "One website per plumbing brand. Each site covers all US cities × up to 150 plumbing services = up to ~201,000 unique SEO pages.",
+    "dataset": {
+      "locations": "2,249 US cities in lib/data/locations.json — each has: id, state_code, state_name, place_name, place_slug, population, tier (1/2/3)",
+      "services": "150 plumbing services in lib/data/services.json — each has: id, service_name, service_slug, base_keywords[]"
+    },
+    "tier_system": {
+      "explanation": "Cities are ranked by population into 3 tiers. Tier determines how many of the 150 services a city gets on its page and in generateStaticParams.",
+      "tier_1": "All 150 services — large cities",
+      "tier_2": "~75 services (50% of 150) — medium cities",
+      "tier_3": "~25 services (17% of 150) — small cities"
+    },
+    "page_structure": {
+      "homepage": "/ — 50-state grid showing city counts and total page counts. JSON-LD for Organization + WebSite schema.",
+      "state_page": "/{state} — e.g. /ca — grid of all cities in that state sorted by population.",
+      "city_page": "/{state}/{city} — e.g. /ca/los-angeles — grid of services available for that city's tier.",
+      "service_page": "/{state}/{city}/{service} — e.g. /ca/los-angeles/drain-cleaning — full SEO page with: title/description meta, canonical URL, JSON-LD LocalBusiness schema, star ratings, intro paragraph, body paragraphs, trust bullet points, FAQ section, links to nearby cities and sibling services."
+    },
+    "content_system": {
+      "content_pack": "lib/data/content-pack.json — sentence-level templates with {placeholder} tokens. Has pools for: intro paragraphs, body1, body2, trust bullet sets, FAQ answers (cost/arrival/before-arrival).",
+      "placeholder_tokens": ["{kw}", "{kw0}", "{kw1}", "{cityName}", "{brandName}", "{nichePluralLower}", "{nicheLower}", "{phoneNumber}"],
+      "spintax_selection": "lib/spintax.ts selectVariant() picks which template a page uses via a deterministic hash: Math.abs((locationId * 31 + serviceId + salt * 97) % variants.length). Same URL always gets the same content variant. Salt=0 is reserved for the original template site.",
+      "content_rendering": "lib/content.ts renderTemplate() substitutes {placeholder} tokens with real values at render time."
+    },
+    "seo_features": [
+      "Canonical URLs on every page",
+      "JSON-LD structured data (LocalBusiness, Organization, WebSite, Service schemas)",
+      "Star ratings (4.7–5.0, deterministically varied per city/service)",
+      "FAQ schema per service page",
+      "Cross-links to nearby cities (3 per page) and sibling services (5 per page)",
+      "Sitemap index at /sitemap.xml linking to per-state sitemaps at /sitemap/{state}",
+      "robots.txt served from app/robots.ts — allows all, disallows /_next/ and RSC params, includes Sitemap directive",
+      "Google Analytics 4 (gtag.js) integration via NEXT_PUBLIC_GA_ID",
+      "Google Search Console verification via NEXT_PUBLIC_GSC_TOKEN meta tag",
+      "Google AdSense via NEXT_PUBLIC_ADSENSE_ID"
+    ],
+    "key_components": {
+      "StickyNav.tsx": "Fixed top navigation bar (client component)",
+      "MobileStickyBar.tsx": "Bottom call-to-action bar on mobile (client component)",
+      "Footer.tsx": "Footer with service links (server component)"
+    },
+    "config_surface": {
+      "source": "lib/config.ts reads NEXT_PUBLIC_* environment variables at build time",
+      "variables": {
+        "NEXT_PUBLIC_BRAND_NAME": "Brand name shown throughout the site",
+        "NEXT_PUBLIC_PHONE_NUMBER": "Display phone number, e.g. (800) 555-0000",
+        "NEXT_PUBLIC_PHONE_TEL": "Digits-only phone for tel: links, e.g. 8005550000",
+        "NEXT_PUBLIC_SITE_URL": "Full domain with protocol, e.g. https://victormoodyplumbinginc.com",
+        "NEXT_PUBLIC_NICHE": "e.g. Plumbing",
+        "NEXT_PUBLIC_NICHE_PLURAL": "e.g. Plumbers",
+        "NEXT_PUBLIC_NICHE_SINGULAR": "e.g. Plumber",
+        "NEXT_PUBLIC_SCHEMA_TYPE": "Schema.org type, e.g. Plumber",
+        "NEXT_PUBLIC_GA_ID": "Google Analytics 4 measurement ID (optional)",
+        "NEXT_PUBLIC_ADSENSE_ID": "Google AdSense publisher ID (optional)",
+        "NEXT_PUBLIC_GSC_TOKEN": "Google Search Console verification token (optional)",
+        "NEXT_PUBLIC_CONTENT_SALT": "Per-site spintax offset integer — 0 for the template, non-zero for every generated site"
+      }
+    },
+    "important_bugs_fixed": [
+      {
+        "bug": "Sitemap index linked to /sitemap/{state}.xml (with .xml extension) but the actual route serves at /sitemap/{state} (without .xml). This caused Google Search Console to report 'Couldn't fetch' for all state sitemaps.",
+        "fix": "Removed .xml suffix from <loc> URLs in app/sitemap.xml/route.ts",
+        "file": "artifacts/plumbing-directory/app/sitemap.xml/route.ts"
+      },
+      {
+        "bug": "A stale public/robots.txt file (containing only 'User-agent: *\\nAllow: /') was shadowing the correct app/robots.ts (which has proper Disallow rules and the Sitemap: directive). Next.js serves public/ files before app/ route handlers.",
+        "fix": "Deleted public/robots.txt so the correct app/robots.ts is served",
+        "file": "artifacts/plumbing-directory/public/robots.txt (deleted)"
+      }
+    ]
+  },
+
+  "site_factory": {
+    "purpose": "Automate spinning up a new independently-branded plumbing directory site in minutes instead of a full manual setup session. Each new site gets its own GitHub repo, Cloudflare Worker, custom domain binding, and AI-generated unique content.",
+    "location": "scripts/src/site-factory/",
+    "factory_repo_backup": "https://github.com/aroragroupindiamart-gif/plumbing-site-factory",
+    "commands": {
+      "site:create-repo": "pnpm --filter @workspace/scripts run site:create-repo -- path/to/config.json — creates GitHub repo from template, sets all secrets, generates unique content pack",
+      "site:setup-domain": "pnpm --filter @workspace/scripts run site:setup-domain -- path/to/config.json — registers Cloudflare zone, polls until active, binds custom domain to Worker",
+      "site:find": "pnpm --filter @workspace/scripts run site:find -- domain.com — looks up a site in the registry by domain",
+      "site:generate-content-pack": "pnpm --filter @workspace/scripts run site:generate-content-pack -- path/to/config.json — standalone content pack generation (retry command)"
+    },
+    "scripts": {
+      "create-site-repo.ts": {
+        "what_it_does": [
+          "Marks the template repo as is_template on GitHub (if not already)",
+          "Calls POST /repos/{templateRepo}/generate to create a new independent GitHub repo",
+          "Enables GitHub Actions on the new repo",
+          "Calls siteContentSalt(siteId) to derive a deterministic non-zero salt",
+          "Writes the new site to sites-registry.json",
+          "Sets all required GitHub Actions secrets (brand, phone, domain, Cloudflare creds, content salt) using libsodium sealed-box encryption via the GitHub Secrets API",
+          "Waits for the new repo's file tree to become queryable (GitHub's template generation is async)",
+          "Calls generateContentPack() to get AI-written content templates",
+          "Commits the new content-pack.json to the new repo's lib/data/content-pack.json",
+          "The initial commit from template generation triggers the deploy.yml GitHub Actions workflow automatically — no manual trigger needed"
+        ],
+        "dependencies": ["GITHUB_PAT (repo + workflow scopes)", "CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_TOKEN", "AI_INTEGRATIONS_ANTHROPIC_API_KEY", "AI_INTEGRATIONS_ANTHROPIC_BASE_URL"]
+      },
+      "setup-cloudflare-domain.ts": {
+        "what_it_does": [
+          "Calls GET /zones?name={domain} to check if the zone already exists",
+          "If not: calls POST /zones to create the Cloudflare zone for the domain",
+          "Prints the two Cloudflare nameservers and waits (polling every 30s, up to 20 attempts) for the zone to go active",
+          "NOTE: Nameserver update at the domain registrar is MANUAL — the script cannot do this",
+          "Calls PUT /accounts/{accountId}/workers/domains to bind the domain as a Custom Domain to the Worker (Cloudflare then manages the DNS A record automatically)",
+          "Updates sites-registry.json with the Cloudflare zone ID"
+        ],
+        "dependencies": ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_DNS_API_TOKEN (separate from deploy token — needs Zone+DNS+Edit, Zone+Zone+Edit scoped to All zones, Account+Account Settings+Edit, Account+Workers Scripts+Edit)"]
+      },
+      "generate-content-pack.ts": {
+        "what_it_does": [
+          "Builds a prompt instructing Claude to write sentence-level marketing copy templates for the site's niche and brand",
+          "Calls Anthropic claude-sonnet-4-6 via the Replit AI Integrations proxy (no personal API key needed)",
+          "Validates the response with Zod schema (requires at least 6 intro, 6 body1, 6 body2, 4 trust bullet sets of 5 each, 3 FAQ answers per question)",
+          "Validates that no disallowed placeholder tokens were used",
+          "Returns the content pack object for create-site-repo.ts to commit"
+        ],
+        "output_shape": {
+          "intro": "array of paragraph templates (at least 6)",
+          "body1": "array of paragraph templates (at least 6)",
+          "body2": "array of paragraph templates (at least 6)",
+          "trustBulletSets": "array of bullet-point arrays (at least 4 sets, 5 bullets each)",
+          "faqCostAnswers": "array of FAQ answer templates (at least 3)",
+          "faqArrivalAnswers": "array of FAQ answer templates (at least 3)",
+          "faqBeforeArrivalAnswers": "array of FAQ answer templates (at least 3)"
+        }
+      },
+      "site-registry.ts": "upsertSiteEntry() / registryEntryFromConfig() — read/write helpers for sites-registry.json",
+      "find-site.ts": "CLI: reads sites-registry.json and prints matching site(s) by domain or lists all",
+      "types.ts": {
+        "SiteConfig": "Interface defining all per-site config fields (siteId, githubOwner, templateRepo, brandName, phoneNumber, phoneTel, domain, niche fields, optional GA/AdSense/GSC IDs)",
+        "siteContentSalt": "function(siteId: string): number — deterministic hash of siteId → non-zero integer salt. Salt=0 is reserved for the live template. Formula: hash = chars.reduce((h, c) => (h*31 + c) % 100000, 0); return (hash % 9973) + 1",
+        "toRepoSecrets": "function(config, cfAccountId, cfApiToken): Record<string,string> — maps SiteConfig to the full set of GitHub Actions secrets"
+      }
+    },
+    "content_differentiation_strategy": {
+      "problem": "All sites share the same city/service dataset and page templates. Without differentiation, every site would render byte-identical sentences for the same city/service pair — a duplicate content SEO penalty risk.",
+      "solution_layer_1_salt": "Each site gets a unique NEXT_PUBLIC_CONTENT_SALT (derived from siteId). The selectVariant() hash includes salt, so even sites sharing the same content pool pick different variants per page.",
+      "solution_layer_2_content_pack": "Each new site gets a fully AI-generated content-pack.json with genuinely different wording (not synonym-swapped) tailored to that site's brand/niche. Committed to the site's repo at creation time.",
+      "hard_constraint": "The live template site's content-pack.json must NEVER be changed (no entries added, removed, or reordered) and its CONTENT_SALT must stay 0. Changing either one changes which variant every existing page renders, corrupting the live site's output. generateContentPack must NEVER be run against the template repo.",
+      "residual_risk": "Page structure, JSON-LD shape, dataset facts (city name, service name), and FAQ question wording are still shared across all sites. Only marketing copy sentences vary."
+    }
+  },
+
+  "github_actions_pipeline": {
+    "file": "artifacts/plumbing-directory/.github/workflows/deploy.yml",
+    "trigger": "push to main branch",
+    "steps": [
+      "Checkout repository",
+      "Set up pnpm v9",
+      "Set up Node.js 22",
+      "pnpm install --no-frozen-lockfile",
+      "pnpm run build:cf (builds via OpenNext for Cloudflare Workers, NODE_OPTIONS max-old-space-size=6144)",
+      "cloudflare/wrangler-action@v4 — deploys the built Worker to Cloudflare"
+    ],
+    "required_secrets": ["CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID", "NEXT_PUBLIC_BRAND_NAME", "NEXT_PUBLIC_PHONE_NUMBER", "NEXT_PUBLIC_PHONE_TEL", "NEXT_PUBLIC_SITE_URL", "NEXT_PUBLIC_NICHE", "NEXT_PUBLIC_NICHE_PLURAL", "NEXT_PUBLIC_NICHE_SINGULAR", "NEXT_PUBLIC_SCHEMA_TYPE"],
+    "optional_secrets": ["NEXT_PUBLIC_GA_ID", "NEXT_PUBLIC_ADSENSE_ID", "NEXT_PUBLIC_GSC_TOKEN", "NEXT_PUBLIC_CONTENT_SALT"],
+    "why_public_repos": "GitHub Actions minutes are unlimited for public repos. Private repos share a 2,000 min/month cap across the account — unworkable at 30+ sites doing regular deploys.",
+    "secrets_encryption": "Secrets are set programmatically via GitHub Secrets API using libsodium sealed-box encryption (the same pattern GitHub's own web UI uses internally)."
+  },
+
+  "cloudflare_setup": {
+    "architecture_per_site": "1 Cloudflare zone (domain) + 1 Worker script + 1 Custom Domain binding",
+    "custom_domain_vs_route": "Custom Domain binding (not a Worker route) — Cloudflare manages the DNS A record automatically once the domain is bound. No manual DNS record creation needed after nameserver delegation.",
+    "free_plan_limits": {
+      "workers_per_account": "100 total (hard cap) — this is the primary scaling ceiling since each site = 1 Worker",
+      "zones_per_account": "Unlimited",
+      "requests_per_day": "100,000 shared across ALL Workers in the account — the second scaling ceiling once sites gain traffic",
+      "dns_records_per_zone": "1,000 (for zones created after September 2024)",
+      "custom_domains_per_zone": "100 (irrelevant — each site uses only 1)"
+    },
+    "safe_site_count_per_account": "Recommended: 70-80 sites per free Cloudflare account. Do not push to 100 (no buffer for retries/mistakes). Switch to a new account when either the site count approaches 80 OR combined daily requests approach 50,000-60,000/day (not 100,000 — traffic spikes need headroom).",
+    "account_switch_strategy": "When near limits, start a new free Cloudflare account for the next batch of sites. No billing upgrade needed — just use different account credentials.",
+    "api_token_permissions": {
+      "deploy_token_CLOUDFLARE_API_TOKEN": "Deploy-only — used by GitHub Actions via wrangler-action. Does not have zone/DNS permissions.",
+      "dns_token_CLOUDFLARE_DNS_API_TOKEN": {
+        "used_by": "setup-cloudflare-domain.ts only",
+        "required_permissions": [
+          "Zone → DNS → Edit (read/write DNS records)",
+          "Zone → Zone → Edit scoped to All zones (required to create new zones — chicken-and-egg: can't scope to a zone that doesn't exist yet)",
+          "Account → Account Settings → Edit (also required for zone creation)",
+          "Account → Workers Scripts → Edit (required for PUT /accounts/{id}/workers/domains — missing this causes misleading 403 code 10000 that looks like a bad token but is actually a missing-scope error)"
+        ]
+      }
+    }
+  },
+
+  "live_site_operations": {
+    "google_search_console": {
+      "sitemap_submitted": "https://victormoodyplumbinginc.com/sitemap.xml",
+      "sitemap_format": "Sitemap index linking to per-state sitemaps at /sitemap/{state} (no .xml extension in the URL)",
+      "verification_method": "HTML meta tag — NEXT_PUBLIC_GSC_TOKEN rendered in <head> as <meta name='google-site-verification' content='...'/>",
+      "note_on_sitemap_not_indexed": "URL Inspection in GSC showing 'not indexed' for /sitemap/ak or similar is NORMAL — sitemap XML files are not indexed as search results. The correct check is 'Test Live URL' which confirms Google can fetch the file (HTTP 200)."
+    },
+    "google_analytics": {
+      "measurement_id": "G-V9MMDSL1JX",
+      "implementation": "gtag.js loaded in root layout via NEXT_PUBLIC_GA_ID — renders as global site tag in <head>"
+    }
+  },
+
+  "how_to_launch_a_new_site": {
+    "step_1": "Copy scripts/src/site-factory/example-site-config.json and fill in: siteId (machine-friendly, becomes repo + Worker name), brandName, phoneNumber, phoneTel, domain. Keep niche fields as-is for plumbing.",
+    "step_2": "Run: pnpm --filter @workspace/scripts run site:create-repo -- path/to/your-config.json. This creates the GitHub repo, sets all secrets, and generates a unique content pack. GitHub Actions starts deploying automatically.",
+    "step_3": "Buy the domain from any registrar.",
+    "step_4": "Run: pnpm --filter @workspace/scripts run site:setup-domain -- path/to/your-config.json. This creates the Cloudflare zone and prints the two nameservers you need to set at your registrar.",
+    "step_5": "At your domain registrar, update the nameservers to the two Cloudflare nameservers printed in step 4. This is the ONLY manual step.",
+    "step_6": "The setup-domain script polls automatically until the zone goes active (can take minutes to hours depending on registrar). Once active, it binds the domain to the Worker.",
+    "step_7": "Site is live at https://domain. Optional: add GA ID and GSC token as additional GitHub repo secrets, then push a commit to redeploy."
+  },
+
+  "environment_variables_and_secrets": {
+    "in_replit": {
+      "GITHUB_PAT": "Personal access token with repo + workflow scopes — used by all factory scripts to create repos, set secrets, push files",
+      "CLOUDFLARE_ACCOUNT_ID": "Cloudflare account ID — shared across all sites in the same CF account",
+      "CLOUDFLARE_API_TOKEN": "Deploy-only Cloudflare token — reused as a GitHub Actions secret on every generated site repo",
+      "CLOUDFLARE_DNS_API_TOKEN": "Zone/DNS/Workers-domain management token — used by setup-cloudflare-domain.ts only",
+      "SESSION_SECRET": "Used by the API server artifact (separate from plumbing-directory)"
+    },
+    "per_site_in_github_actions": "All NEXT_PUBLIC_* variables listed above, plus CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID — set automatically by create-site-repo.ts"
+  },
+
+  "what_is_shared_across_all_sites": [
+    "All app code (app/, components/, lib/ except content-pack.json)",
+    "locations.json (2,249 cities) and services.json (150 services)",
+    "Tier system logic",
+    "Page templates and JSON-LD structure",
+    "deploy.yml GitHub Actions pipeline",
+    "wrangler.toml and open-next.config.ts",
+    "The spintax selectVariant() algorithm"
+  ],
+
+  "what_varies_per_site": [
+    "siteId (GitHub repo name, Cloudflare Worker name)",
+    "brandName, phoneNumber, phoneTel, domain",
+    "NEXT_PUBLIC_CONTENT_SALT (unique per siteId, auto-derived)",
+    "lib/data/content-pack.json (AI-generated unique sentence templates)",
+    "Cloudflare zone ID",
+    "GA ID, AdSense ID, GSC verification token (optional, per-site)"
+  ],
+
+  "known_limits_and_gotchas": [
+    "Do NOT run pnpm run build locally without patience — generates ~201k HTML files, takes 15-45 minutes.",
+    "Do NOT run generate-content-pack.ts against the live template repo or hand-edit its content-pack.json arrays — changing array length or order changes which variant every existing page renders.",
+    "middleware.ts is NOT supported with output:export — never add it to a static export site.",
+    "CONTENT_SALT=0 is reserved for the original template site. All generated sites must have a non-zero salt.",
+    "Cloudflare zone creation is async — the zone appears immediately but nameserver propagation takes time. The setup-domain script polls and waits.",
+    "GitHub template repo generation is also async — create-site-repo.ts waits up to 20 seconds (polling) before trying to read the new repo's file tree.",
+    "All 100 Workers in a Cloudflare free account share the 100,000 requests/day quota — a traffic spike on one site can throttle all others.",
+    "The Cloudflare token scope needed for Workers Custom Domain binding is 'Account > Workers Scripts > Edit', NOT 'Account > Workers Custom Domains > Edit' (the latter does not exist as a separate permission in the dashboard). Using the wrong name causes a misleading 403.",
+    "Per-state sitemaps are served at /sitemap/{state} WITHOUT .xml extension. The sitemap index must link to URLs without .xml or Google gets 404s."
+  ]
+}
