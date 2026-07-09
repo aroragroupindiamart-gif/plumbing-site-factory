@@ -1,0 +1,24 @@
+{
+  "name": "@workspace/scripts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "hello": "tsx ./src/hello.ts",
+    "site:create-repo": "tsx ./src/site-factory/create-site-repo.ts",
+    "site:setup-domain": "tsx ./src/site-factory/setup-cloudflare-domain.ts",
+    "site:generate-content-pack": "tsx ./src/site-factory/generate-content-pack.ts",
+    "site:find": "tsx ./src/site-factory/find-site.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/libsodium-wrappers": "^0.8.2",
+    "@types/node": "catalog:",
+    "tsx": "catalog:"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.110.0",
+    "libsodium-wrappers": "^0.8.4",
+    "zod": "catalog:"
+  }
+}
