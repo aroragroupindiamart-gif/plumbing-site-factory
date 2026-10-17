@@ -17,13 +17,14 @@ See `TEMPLATE_CONTRACT.md` for what varies per site vs. what's shared.
 | Register the domain as a Cloudflare zone | Yes | `site:setup-domain` |
 | **Update nameservers at the domain registrar** | **No — manual** | You do this once per domain, at whichever registrar you bought it from. Cloudflare gives you two nameserver values; the script prints them and waits for the zone to go active. |
 | Bind the domain to the new site's Worker (Custom Domain + DNS) | Yes | `site:setup-domain`, once the zone is active |
+| Apply Caching & WAF Protocols (Tiered Cache, 30-day Page Rule, US/IN Geo-Block) | Yes | `site:setup-domain`, automatically applied on zone creation |
 | Generate unique sentence-level content + a per-site variant salt | Yes | `site:create-repo` — see `CONTENT_DIFFERENTIATION.md` |
 | Record the site in the local registry (domain, repo, salt, zone id) | Yes | `site:create-repo` and `site:setup-domain` both write to `sites-registry.json` |
 
 ## One-time setup (do this once, not per site)
 
 1. Make sure `GITHUB_PAT`, `CLOUDFLARE_ACCOUNT_ID`, and `CLOUDFLARE_API_TOKEN` are set (already configured for `plumbing-site-2`'s own deploys — reused as-is for every new site).
-2. Add a second Cloudflare secret, `CLOUDFLARE_DNS_API_TOKEN`, scoped with: Account > Zone > Edit, Zone > DNS > Edit, Account > Workers Custom Domains > Edit. This is separate from `CLOUDFLARE_API_TOKEN` on purpose — that one stays deploy-only.
+2. Add a second Cloudflare secret, `CLOUDFLARE_DNS_API_TOKEN`, scoped with: Account > Zone > Edit, Zone > DNS > Edit, Account > Workers Custom Domains > Edit, Zone > Firewall Services > Edit. This is separate from `CLOUDFLARE_API_TOKEN` on purpose — that one stays deploy-only.
 
 ## Per-site steps
 

@@ -1,0 +1,128 @@
+{
+  "timestamp": "2026-10-08T07:04:48.756Z",
+  "domainInfo": {
+    "authCode": "(Y31i,d.0Jl3+M/O",
+    "contactAdmin": {
+      "addressMailing": {
+        "address1": "AD-1",
+        "address2": "Tagore Garden",
+        "city": "New Delhi",
+        "country": "IN",
+        "postalCode": "110027",
+        "state": "Delhi"
+      },
+      "email": "mayank.arora232@gmail.com",
+      "fax": "",
+      "nameFirst": "Mayank",
+      "nameLast": "Arora",
+      "organization": "Chat Cart",
+      "phone": "+91.9716456524"
+    },
+    "contactBilling": {
+      "addressMailing": {
+        "address1": "AD-1",
+        "address2": "Tagore Garden",
+        "city": "New Delhi",
+        "country": "IN",
+        "postalCode": "110027",
+        "state": "Delhi"
+      },
+      "email": "mayank.arora232@gmail.com",
+      "fax": "",
+      "nameFirst": "Mayank",
+      "nameLast": "Arora",
+      "organization": "Chat Cart",
+      "phone": "+91.9716456524"
+    },
+    "contactRegistrant": {
+      "addressMailing": {
+        "address1": "AD-1",
+        "address2": "Tagore Garden",
+        "city": "New Delhi",
+        "country": "IN",
+        "postalCode": "110027",
+        "state": "Delhi"
+      },
+      "email": "mayank.arora232@gmail.com",
+      "fax": "",
+      "nameFirst": "Mayank",
+      "nameLast": "Arora",
+      "organization": "Chat Cart",
+      "phone": "+91.9716456524"
+    },
+    "contactTech": {
+      "addressMailing": {
+        "address1": "AD-1",
+        "address2": "Tagore Garden",
+        "city": "New Delhi",
+        "country": "IN",
+        "postalCode": "110027",
+        "state": "Delhi"
+      },
+      "email": "mayank.arora232@gmail.com",
+      "fax": "",
+      "nameFirst": "Mayank",
+      "nameLast": "Arora",
+      "organization": "Chat Cart",
+      "phone": "+91.9716456524"
+    },
+    "createdAt": "2026-06-19T17:00:24.000Z",
+    "domain": "chatcart.in",
+    "domainId": 475408902,
+    "expirationProtected": false,
+    "expires": "2027-06-19T17:00:24.000Z",
+    "exposeWhois": false,
+    "holdRegistrar": false,
+    "locked": true,
+    "nameServers": [
+      "ns15.domaincontrol.com",
+      "ns16.domaincontrol.com"
+    ],
+    "privacy": false,
+    "registrarCreatedAt": "2026-06-19T10:00:16.293Z",
+    "renewAuto": false,
+    "renewDeadline": "2027-08-03T10:00:20.000Z",
+    "renewable": true,
+    "redeemable": false,
+    "status": "ACTIVE",
+    "transferProtected": false
+  },
+  "records": [
+    {
+      "data": "137.23.58.10",
+      "name": "@",
+      "ttl": 600,
+      "type": "A"
+    },
+    {
+      "data": "137.23.58.10",
+      "name": "staging",
+      "ttl": 600,
+      "type": "A"
+    },
+    {
+      "data": "137.23.58.10",
+      "name": "www",
+      "ttl": 600,
+      "type": "A"
+    },
+    {
+      "data": "ns15.domaincontrol.com",
+      "name": "@",
+      "ttl": 3600,
+      "type": "NS"
+    },
+    {
+      "data": "ns16.domaincontrol.com",
+      "name": "@",
+      "ttl": 3600,
+      "type": "NS"
+    },
+    {
+      "data": "replit-verify=db7b7e9c-78ee-4322-bf02-60fc7e0cf901",
+      "name": "@",
+      "ttl": 600,
+      "type": "TXT"
+    }
+  ]
+}

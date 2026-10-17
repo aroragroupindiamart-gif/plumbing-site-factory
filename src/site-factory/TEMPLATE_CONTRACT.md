@@ -15,6 +15,7 @@ so it can be reused as a generation source.
 | `NEXT_PUBLIC_SITE_URL` | GitHub Actions secret | `https://<domain>`, used for canonical URLs, sitemap, JSON-LD. |
 | `NEXT_PUBLIC_NICHE` / `_PLURAL` / `_SINGULAR` / `NEXT_PUBLIC_SCHEMA_TYPE` | GitHub Actions secret | Only change these if the niche itself changes (e.g. "Plumbing" → "Electrical"). All 100 plumbing sites should keep these identical. |
 | `NEXT_PUBLIC_GA_ID` / `NEXT_PUBLIC_ADSENSE_ID` / `NEXT_PUBLIC_GSC_TOKEN` | GitHub Actions secret (optional) | Per-site analytics/verification IDs. |
+| `NEXT_PUBLIC_DRIP_COUNT` | GitHub Actions secret (optional) | Controls 30-day drip-feeding (e.g. `2` for initial 2 states rollout). |
 | `NEXT_PUBLIC_CONTENT_SALT` | GitHub Actions secret, auto-derived from `siteId` | Offsets which spintax variant each city/service page selects. See `CONTENT_DIFFERENTIATION.md`. |
 | `lib/data/content-pack.json` | Committed per site by `site:create-repo` | AI-generated sentence-level templates unique to that site. See `CONTENT_DIFFERENTIATION.md`. |
 | Domain + DNS + Worker Custom Domain binding | Cloudflare zone, created per site | See `setup-cloudflare-domain.ts`. |
@@ -27,7 +28,7 @@ so it can be reused as a generation source.
 - `locations.json` (2,249 cities) and `services.json` (150 services) — the full dataset.
 - The tiering logic that controls how many services each city gets.
 - The deploy pipeline (`.github/workflows/deploy.yml`, `wrangler.toml`, `open-next.config.ts`).
-- The rendering strategy: state + city pages are statically generated at build time; service pages render on demand via the Worker and are cached at the edge. This keeps CI build time and storage small regardless of how many sites you run.
+- The rendering strategy: state + city pages are statically generated at build time; service pages render on demand via the Worker and are cached at the edge. Automated 30-day drip-feeding starts conservatively at 3 states (~8k-10k pages) in Week 1, expanding to 10 states in Week 2, 25 states in Week 3, and all 50 states in Week 4+.
 
 ## Cost/scale notes
 

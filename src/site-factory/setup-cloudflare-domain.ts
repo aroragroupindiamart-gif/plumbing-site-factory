@@ -26,6 +26,7 @@ import { readFileSync } from "node:fs";
 import type { SiteConfig } from "./types.js";
 import { siteContentSalt } from "./types.js";
 import { registryEntryFromConfig, upsertSiteEntry } from "./site-registry.js";
+import { applyFullCloudflareOptimizations } from "./cloudflare-security-and-caching.js";
 
 interface CloudflareResponse<T = unknown> {
   success: boolean;
@@ -120,6 +121,9 @@ async function main() {
   const activeZone = zone.status === "active" ? zone : await waitForZoneActive(dnsToken, zone.id, config.domain);
 
   await bindWorkerCustomDomain(dnsToken, accountId, activeZone.id, config.domain, config.siteId);
+
+  // Apply caching & WAF geo-blocking protocols from Day 1
+  await applyFullCloudflareOptimizations(dnsToken, activeZone.id, config.domain);
 
   upsertSiteEntry({
     ...registryEntryFromConfig(config, siteContentSalt(config.siteId)),

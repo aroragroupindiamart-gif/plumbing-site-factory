@@ -35,6 +35,15 @@ export interface SiteConfig {
   gaId?: string;
   adsenseId?: string;
   gscToken?: string;
+
+  /** Optional drip-feeding count (e.g. 2 for initial 2 states rollout). Leave undefined for full release. */
+  dripCount?: number;
+
+  /** Optional launch date YYYY-MM-DD for automated drip-feeding. Defaults to current date. */
+  launchDate?: string;
+
+  /** Optional layout design concept ("dispatch" | "credential" | "journey" | "hyperlocal" | "onethumb"). Defaults to rotating based on salt. */
+  designConcept?: "dispatch" | "credential" | "journey" | "hyperlocal" | "onethumb";
 }
 
 /**
@@ -64,10 +73,13 @@ export function toRepoSecrets(config: SiteConfig, cloudflareAccountId: string, c
     NEXT_PUBLIC_NICHE_PLURAL: config.nichePlural,
     NEXT_PUBLIC_NICHE_SINGULAR: config.nicheSingular,
     NEXT_PUBLIC_SCHEMA_TYPE: config.schemaType,
+    NEXT_PUBLIC_LAUNCH_DATE: config.launchDate || new Date().toISOString().split("T")[0],
   };
   if (config.gaId) secrets.NEXT_PUBLIC_GA_ID = config.gaId;
   if (config.adsenseId) secrets.NEXT_PUBLIC_ADSENSE_ID = config.adsenseId;
   if (config.gscToken) secrets.NEXT_PUBLIC_GSC_TOKEN = config.gscToken;
+  if (config.dripCount !== undefined) secrets.NEXT_PUBLIC_DRIP_COUNT = String(config.dripCount);
+  if (config.designConcept) secrets.NEXT_PUBLIC_DESIGN_CONCEPT = config.designConcept;
   secrets.NEXT_PUBLIC_CONTENT_SALT = String(siteContentSalt(config.siteId));
   return secrets;
 }
