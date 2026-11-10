@@ -9,7 +9,11 @@
     "site:setup-domain": "tsx ./src/site-factory/setup-cloudflare-domain.ts",
     "site:generate-content-pack": "tsx ./src/site-factory/generate-content-pack.ts",
     "site:find": "tsx ./src/site-factory/find-site.ts",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "site:rebuild-single": "node ./src/site-factory/rebuild_single_site.mjs",
+    "site:rebuild-all": "node ./src/site-factory/process_all_sites.mjs",
+    "site:reset-day1": "node ./src/site-factory/rollout_day1_reset.mjs",
+    "site:verify-sitemaps": "node ./src/site-factory/verify_day1_sitemaps.mjs"
   },
   "devDependencies": {
     "@types/libsodium-wrappers": "^0.8.2",
