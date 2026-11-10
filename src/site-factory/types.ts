@@ -44,6 +44,14 @@ export interface SiteConfig {
 
   /** Optional layout design concept ("dispatch" | "credential" | "journey" | "hyperlocal" | "onethumb"). Defaults to rotating based on salt. */
   designConcept?: "dispatch" | "credential" | "journey" | "hyperlocal" | "onethumb";
+
+  /** Optional vertical-specific tracking DIDs */
+  phoneWaterPressure?: string;
+  phoneBackflow?: string;
+  phoneRepipe?: string;
+
+  /** Optional Cloudflare Zone ID for automated edge cache purge on deploy */
+  cloudflareZoneId?: string;
 }
 
 /**
@@ -80,6 +88,22 @@ export function toRepoSecrets(config: SiteConfig, cloudflareAccountId: string, c
   if (config.gscToken) secrets.NEXT_PUBLIC_GSC_TOKEN = config.gscToken;
   if (config.dripCount !== undefined) secrets.NEXT_PUBLIC_DRIP_COUNT = String(config.dripCount);
   if (config.designConcept) secrets.NEXT_PUBLIC_DESIGN_CONCEPT = config.designConcept;
+
+  // Vertical-specific LeadSmart tracking DIDs (with fallback)
+  if (config.phoneWaterPressure || process.env.NEXT_PUBLIC_PHONE_WATER_PRESSURE) {
+    secrets.NEXT_PUBLIC_PHONE_WATER_PRESSURE = config.phoneWaterPressure || process.env.NEXT_PUBLIC_PHONE_WATER_PRESSURE!;
+  }
+  if (config.phoneBackflow || process.env.NEXT_PUBLIC_PHONE_BACKFLOW) {
+    secrets.NEXT_PUBLIC_PHONE_BACKFLOW = config.phoneBackflow || process.env.NEXT_PUBLIC_PHONE_BACKFLOW!;
+  }
+  if (config.phoneRepipe || process.env.NEXT_PUBLIC_PHONE_REPIPE) {
+    secrets.NEXT_PUBLIC_PHONE_REPIPE = config.phoneRepipe || process.env.NEXT_PUBLIC_PHONE_REPIPE!;
+  }
+
+  // Cloudflare Zone ID for automatic cache purge on redeploy
+  const zoneId = config.cloudflareZoneId || process.env.CLOUDFLARE_ZONE_ID;
+  if (zoneId) secrets.CLOUDFLARE_ZONE_ID = zoneId;
+
   secrets.NEXT_PUBLIC_CONTENT_SALT = String(siteContentSalt(config.siteId));
   return secrets;
 }
