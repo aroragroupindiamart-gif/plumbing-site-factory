@@ -583,6 +583,396 @@
         "savanna.ns.cloudflare.com"
       ],
       "gscToken": "syisT-3LM-CfLDXr8zrMgE9nmc40yWtNiArZkoAGwG0"
+    },
+    {
+      "siteId": "tice-plumbing",
+      "domain": "ticeplumbing.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/tice-plumbing",
+      "workerUrl": "https://tice-plumbing.aroragroup-indiamart.workers.dev",
+      "brandName": "Tice Plumbing",
+      "phoneNumber": "(855) 391-3175",
+      "phoneTel": "8553913175",
+      "launchDate": "2026-10-21",
+      "status": "active",
+      "designConcept": "dispatch",
+      "cloudflareZoneId": "4fcccf1fffe4246e907caee4de6af8c9",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "Tz_0pPDo7MP1BtemA-CMlqh5VUsx6sBqJURl7n3Ra6I"
+    },
+    {
+      "siteId": "plumbing-fix-pro",
+      "domain": "plumbingfixpro.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/plumbing-fix-pro",
+      "workerUrl": "https://plumbing-fix-pro.aroragroup-indiamart.workers.dev",
+      "brandName": "Plumbing Fix Pro",
+      "phoneNumber": "(855) 391-3175",
+      "phoneTel": "8553913175",
+      "launchDate": "2026-10-21",
+      "status": "active",
+      "designConcept": "credential",
+      "cloudflareZoneId": "2ba602bf1c83820efc0d86bbc4b05de7",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "pN1kz0TODZ7iTmNCD0ogN8diYUO2fpQioIUxZja2230"
+    },
+    {
+      "siteId": "plumbers-v-excavating",
+      "domain": "plumbersvexcavating.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/plumbers-v-excavating",
+      "workerUrl": "https://plumbers-v-excavating.aroragroup-indiamart.workers.dev",
+      "brandName": "Plumbers V Excavating",
+      "phoneNumber": "(855) 391-3175",
+      "phoneTel": "8553913175",
+      "launchDate": "2026-10-21",
+      "status": "active",
+      "designConcept": "journey",
+      "cloudflareZoneId": "d5509a73dc07d1a0e14a2716dbc90820",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "YG02RN_dibTPrejtYBqlD1CAt6ogFfwbnwYwjnXXTgU"
+    },
+    {
+      "siteId": "john-rykowski-plumbing",
+      "domain": "johnrykowskiplumbing.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/john-rykowski-plumbing",
+      "workerUrl": "https://john-rykowski-plumbing.aroragroup-indiamart.workers.dev",
+      "brandName": "John Rykowski Plumbing",
+      "phoneNumber": "(855) 391-3175",
+      "phoneTel": "8553913175",
+      "launchDate": "2026-10-21",
+      "status": "active",
+      "designConcept": "hyperlocal",
+      "cloudflareZoneId": "dcca8771ed1900a53fe212c2ff4d3a0f",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "S7oL2dbjgSoFoB-uOxv0BhCE9HrQXn-xBisvP0hpA8s"
+    },
+    {
+      "siteId": "rci-plumbing-and-gas",
+      "domain": "rciplumbingandgas.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/rci-plumbing-and-gas",
+      "workerUrl": "https://rci-plumbing-and-gas.aroragroup-indiamart.workers.dev",
+      "brandName": "RCI Plumbing and Gas",
+      "phoneNumber": "(855) 391-3175",
+      "phoneTel": "8553913175",
+      "launchDate": "2026-10-21",
+      "status": "active",
+      "designConcept": "onethumb",
+      "cloudflareZoneId": "b897ae6c80a38cacc04d700fb0dc5fc5",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "qeJoYANle0fiIpAINs6dX5Orzf5YIboNwx8ZseslAfA"
+    },
+    {
+      "siteId": "bruce-hohman-plumbing",
+      "domain": "brucehohmanplumbing.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/bruce-hohman-plumbing",
+      "workerUrl": "https://bruce-hohman-plumbing.aroragroup-indiamart.workers.dev",
+      "brandName": "Bruce Hohman Plumbing",
+      "phoneNumber": "(855) 391-3175",
+      "phoneTel": "8553913175",
+      "launchDate": "2026-10-21",
+      "status": "active",
+      "designConcept": "dispatch",
+      "cloudflareZoneId": "1c38167701278cb96913414d617b4782",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "fq274AiFBCRRzmM7IdHc8o-SdUOdk98bxLZWXGg4kdI"
+    },
+    {
+      "siteId": "expert-plumbing-and-heating",
+      "domain": "expertplumbingandheating.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/expert-plumbing-and-heating",
+      "workerUrl": "https://expert-plumbing-and-heating.aroragroup-indiamart.workers.dev",
+      "brandName": "Expert Plumbing and Heating",
+      "phoneNumber": "(855) 391-3175",
+      "phoneTel": "8553913175",
+      "launchDate": "2026-10-21",
+      "status": "active",
+      "designConcept": "credential",
+      "cloudflareZoneId": "abf76ecfc3aed788b606ebda9991a515",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "4-tn45dh6zQiCjPllV8Rp9Y5DRdPJeCl6O7L5PhCan4"
+    },
+    {
+      "siteId": "plumbing-xpert",
+      "domain": "plumbingxpert.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/plumbing-xpert",
+      "workerUrl": "https://plumbing-xpert.aroragroup-indiamart.workers.dev",
+      "brandName": "Plumbing Xpert",
+      "phoneNumber": "(855) 391-3175",
+      "phoneTel": "8553913175",
+      "launchDate": "2026-10-21",
+      "status": "active",
+      "designConcept": "journey",
+      "cloudflareZoneId": "89650ab8169a5d6e07d63f881a847775",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "mcpDSsbopS-tBsk3GceoLY9aATOYHi-b1dXRam_Iy4g"
+    },
+    {
+      "siteId": "affordable-plus-plumbing",
+      "domain": "affordableplusplumbing.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/affordable-plus-plumbing",
+      "workerUrl": "https://affordable-plus-plumbing.aroragroup-indiamart.workers.dev",
+      "brandName": "Affordable Plus Plumbing",
+      "phoneNumber": "(855) 391-3175",
+      "phoneTel": "8553913175",
+      "launchDate": "2026-10-21",
+      "status": "active",
+      "designConcept": "hyperlocal",
+      "cloudflareZoneId": "a6616c3c277cf558a8a71001af068553",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "IEDhrOXLZF671BoMeRKlnWGOhy08rSteyX8aP92h0BQ"
+    },
+    {
+      "siteId": "fast-plumber-services",
+      "domain": "fastplumberservices.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/fast-plumber-services",
+      "workerUrl": "https://fast-plumber-services.aroragroup-indiamart.workers.dev",
+      "brandName": "Fast Plumber Services",
+      "phoneNumber": "(855) 391-3175",
+      "phoneTel": "8553913175",
+      "launchDate": "2026-10-21",
+      "status": "active",
+      "designConcept": "onethumb",
+      "cloudflareZoneId": "7adced5eebf135b7aee303a51b1712c7",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "unq4iUPtoJ3rb1WNK7i47hR2p1OXKB2fbcAksE9eHwE"
+    },
+    {
+      "siteId": "silvaplumbinginc",
+      "domain": "silvaplumbinginc.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/silvaplumbinginc",
+      "workerUrl": "https://silvaplumbinginc.aroragroup-indiamart.workers.dev",
+      "brandName": "Silva Plumbing Inc",
+      "phoneNumber": "(844) 975-7740",
+      "phoneTel": "8449757740",
+      "launchDate": "2026-10-22",
+      "status": "active",
+      "designConcept": "dispatch",
+      "contentSalt": 200,
+      "cloudflareZoneId": "bf1823015cad91c8dc8cebbd045e661a",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "5oh2k8ClvqvIgzeUs6NTGQR9vgZiHQe4w_UsI9XsGHs"
+    },
+    {
+      "siteId": "plumbingstanford",
+      "domain": "plumbingstanford.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/plumbingstanford",
+      "workerUrl": "https://plumbingstanford.aroragroup-indiamart.workers.dev",
+      "brandName": "Plumbing Stanford",
+      "phoneNumber": "(844) 975-7740",
+      "phoneTel": "8449757740",
+      "launchDate": "2026-10-22",
+      "status": "active",
+      "designConcept": "credential",
+      "contentSalt": 217,
+      "cloudflareZoneId": "1f79eedae06bb8a448ab9f1aef334c41",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "2ZmOSKRUERY174oBjA6FQaTfjCzVU1U2bVYZjyyxw-A"
+    },
+    {
+      "siteId": "drdrainplumbingoh",
+      "domain": "drdrainplumbingoh.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/drdrainplumbingoh",
+      "workerUrl": "https://drdrainplumbingoh.aroragroup-indiamart.workers.dev",
+      "brandName": "Dr. Drain Plumbing OH",
+      "phoneNumber": "(844) 975-7740",
+      "phoneTel": "8449757740",
+      "launchDate": "2026-10-22",
+      "status": "active",
+      "designConcept": "journey",
+      "contentSalt": 234,
+      "cloudflareZoneId": "45f324d0ce6d7d7e46c5711e9fad1b71",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "K_P8WA2bB0MQ0CyCYE7-hk8m_ag6vVn_BzksnnyJvAw"
+    },
+    {
+      "siteId": "hospitalityplumbers",
+      "domain": "hospitalityplumbers.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/hospitalityplumbers",
+      "workerUrl": "https://hospitalityplumbers.aroragroup-indiamart.workers.dev",
+      "brandName": "Hospitality Plumbers",
+      "phoneNumber": "(844) 975-7740",
+      "phoneTel": "8449757740",
+      "launchDate": "2026-10-22",
+      "status": "active",
+      "designConcept": "hyperlocal",
+      "contentSalt": 251,
+      "cloudflareZoneId": "96f06321388ff102eb95c67e6c1215a6",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "D87oX8Kq9_UuRevTDMPR4ehbNatEDu-Jh_dcLCsIW0Q"
+    },
+    {
+      "siteId": "calienteplumbinghvac",
+      "domain": "calienteplumbinghvac.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/calienteplumbinghvac",
+      "workerUrl": "https://calienteplumbinghvac.aroragroup-indiamart.workers.dev",
+      "brandName": "Caliente Plumbing HVAC",
+      "phoneNumber": "(844) 975-7740",
+      "phoneTel": "8449757740",
+      "launchDate": "2026-10-22",
+      "status": "active",
+      "designConcept": "onethumb",
+      "contentSalt": 268,
+      "cloudflareZoneId": "0152eefd51e0da0707ab13dd8db25e14",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "rviM88iWfd0oMgyeY2boyIEdsLgb-otBH8qX9cqpeps"
+    },
+    {
+      "siteId": "allhoustonplumbingcompany",
+      "domain": "allhoustonplumbingcompany.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/allhoustonplumbingcompany",
+      "workerUrl": "https://allhoustonplumbingcompany.aroragroup-indiamart.workers.dev",
+      "brandName": "All Houston Plumbing Company",
+      "phoneNumber": "(844) 975-7740",
+      "phoneTel": "8449757740",
+      "launchDate": "2026-10-22",
+      "status": "active",
+      "designConcept": "dispatch",
+      "contentSalt": 285,
+      "cloudflareZoneId": "e3a9bb78ceff0abc24ce2cc166710838",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "faOCKucJOdnWYwdu0YuENhHLSuSh_NnEMv8unqYBHlE"
+    },
+    {
+      "siteId": "plumbingstarkville",
+      "domain": "plumbingstarkville.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/plumbingstarkville",
+      "workerUrl": "https://plumbingstarkville.aroragroup-indiamart.workers.dev",
+      "brandName": "Plumbing Starkville",
+      "phoneNumber": "(844) 975-7740",
+      "phoneTel": "8449757740",
+      "launchDate": "2026-10-22",
+      "status": "active",
+      "designConcept": "credential",
+      "contentSalt": 302,
+      "cloudflareZoneId": "6acacc90db24ebbe5dce644ae09caa63",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "x4fKOVzusrPgFlhfVzKgt6M3X8Hc4P41wGkxNw2Y8pw"
+    },
+    {
+      "siteId": "plumbingtorrington",
+      "domain": "plumbingtorrington.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/plumbingtorrington",
+      "workerUrl": "https://plumbingtorrington.aroragroup-indiamart.workers.dev",
+      "brandName": "Plumbing Torrington",
+      "phoneNumber": "(844) 975-7740",
+      "phoneTel": "8449757740",
+      "launchDate": "2026-10-22",
+      "status": "active",
+      "designConcept": "journey",
+      "contentSalt": 319,
+      "cloudflareZoneId": "00ff2c18354fec85a736386be306f413",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "4O3zpJe2O-G39WzkmjwKXbA49n1kFBXzhvUAkcbAkLM"
+    },
+    {
+      "siteId": "plumbingstmichael",
+      "domain": "plumbingstmichael.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/plumbingstmichael",
+      "workerUrl": "https://plumbingstmichael.aroragroup-indiamart.workers.dev",
+      "brandName": "Plumbing St. Michael",
+      "phoneNumber": "(844) 975-7740",
+      "phoneTel": "8449757740",
+      "launchDate": "2026-10-22",
+      "status": "active",
+      "designConcept": "hyperlocal",
+      "contentSalt": 336,
+      "cloudflareZoneId": "ec40194f4dcbe42e41c78b00ff0e9347",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "EB5gWWUh3Fqde3mGTFdKI2h0Xi6xamr7wShVqeHPSXM"
+    },
+    {
+      "siteId": "westbranchplumbing",
+      "domain": "westbranchplumbing.com",
+      "githubOwner": "aroragroupindiamart-gif",
+      "repoUrl": "https://github.com/aroragroupindiamart-gif/westbranchplumbing",
+      "workerUrl": "https://westbranchplumbing.aroragroup-indiamart.workers.dev",
+      "brandName": "West Branch Plumbing",
+      "phoneNumber": "(844) 975-7740",
+      "phoneTel": "8449757740",
+      "launchDate": "2026-10-22",
+      "status": "active",
+      "designConcept": "onethumb",
+      "contentSalt": 353,
+      "cloudflareZoneId": "1cd36c4b3f48418591f87b64e013fb82",
+      "nameservers": [
+        "otto.ns.cloudflare.com",
+        "savanna.ns.cloudflare.com"
+      ],
+      "gscToken": "qcJWTPRJZVmD8qu-oMyxeslX1HZaBq11h7Rr39pANzg"
     }
   ]
 }

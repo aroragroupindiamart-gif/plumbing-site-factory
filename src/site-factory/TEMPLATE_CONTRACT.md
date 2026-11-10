@@ -35,3 +35,17 @@ so it can be reused as a generation source.
 - Keep generated repos **public** — GitHub Actions minutes are unlimited and free on public repos, uncapped even at 100 sites. Private repos only get 2,000 free minutes/month combined across the account.
 - All Workers live in the same Cloudflare account and share its request quota. The free plan caps at 100,000 requests/day account-wide; once real traffic accumulates across multiple sites, move the account to the $5/month Workers Paid plan (10M requests/month included) rather than staying on Free.
 - Because content (city/service data) is shared verbatim across every site, sites that only swap the brand name carry real duplicate-content SEO risk. `site:create-repo` now generates a unique sentence-level content pack + variant salt per site to mitigate this — see `CONTENT_DIFFERENTIATION.md` for the mechanism and its limits.
+
+## Route 3 v3.2 Locked Architectural Standards (Permanent)
+
+All new sites generated from `victor-moody-plumbing` must strictly inherit and preserve:
+1. **Day 1 Footprint (46 URLs)**: Exactly 1 Homepage + 9 Authority Diagnostic Hubs & Cost Guide + 36 Wave-1 City Landing Pages (12 Audited AZ/CA Metros × 3 Core Services).
+2. **Single Direct Sitemap**: `/sitemap.xml` directly returns all 46 URLs with `Cache-Control: public, max-age=0, must-revalidate`.
+3. **Hub 301/308 Redirects**: `/cost-guide`, `/high-water-pressure`, `/backflow-preventer`, `/repipe`, `/cast-iron-pipe-replacement` cleanly redirect to canonical hubs.
+4. **Strict State Clamping**: States with 0 dripped cities (e.g. `/ny`, `/tx`, `/il`, `/pa`) return true HTTP 404.
+5. **Local Municipal Data Box**: Every city page displays $\ge 4$ verified local infrastructure points (Water District, GPG Hardness, PSI Code, Backflow Compliance Agency).
+6. **Pre-Call Priming Block**: 3-point LeadSmart pre-qualification block active on all city/hub pages.
+7. **User-Mandated Conversion Assets**: Star ratings (`★ 4.8`), review counts, 30–45 min dispatch timing, and flat-rate pricing claims must NEVER be removed or altered.
+8. **Edge Cache**: Dynamic pages revalidate at 5 minutes (`revalidate = 300`).
+9. **Per-Vertical DIDs**: `getDidForService()` binds to vertical DIDs with fallback to primary phone.
+10. **Aged & Expired Domain Protocol**: All portfolio domains are aged assets with existing backlink profiles. Sites must preserve plumbing entity relevance, redirect top legacy backlink URLs (e.g. `/services`, `/about-us`) via 301/308 to relevant Authority Hubs to reclaim historical link juice, and maintain the 46 Day-1 URL cap to prevent triggering Google's Expired Domain Abuse filter.
